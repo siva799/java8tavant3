@@ -1,28 +1,36 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.function.Function;
 import java.util.List;
 import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
+import java.util.function.UnaryOperator;
 
-public class MainBinaryOperator {
+public class BinaryOperator {
 	public static void main(String[] args) {
-		BiFunction<Integer ,Float ,Float> func = (x,y)->x+y.floatValue();
-		Float result = func.apply(10, 20.09f);
+		BiFunction<Integer,Float,Float> func = (x,y)->(float)(x+y);
+		
+		Float result = func.apply(10, 20.00f);
 		System.out.println(result);
-		List<Integer> integers = Arrays.asList(1,2,3,45,67,8,8,9);	
-		List<Float> floats = Arrays.asList(1.2f,3.0f,4.0f,6.0f,7.8f,9.9f,0.5f,87f);
 		
-		List<Float> floats2 =  math(integers,floats,(x,y)->x+y);
+		List<Float> floats = Arrays.asList(10.10f,20.33f,34.55f,42.5f,53.05f,60.50f,70.08f,80.6f,96.77f);
 		
+		List<Float> floats2 = math(floats,(x,y)->(float)(x+y));
+		floats2.forEach(System.out::println);
+	
 	}
-
-	private static <T>List<T> math(List<T> integers, List<T> floats, BiFunction<T> biFunction ) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	
+	public static <T> List<T> math(List<T> list, BinaryOperator<T> BinaryOperator) {
+		List<T> result = new ArrayList<T>();
+		
+		for (T t : list) {
+			result.add(BinaryOperator.apply(t,t));
+		}
+		return result;
+	}
+	
+}
 
 	
 	
